@@ -1,0 +1,300 @@
+{
+  "schema_version": "product-truth-model.v1",
+  "product_id": "ent.product.cyrvony",
+  "updated_at": "2026-05-17T14:30:00.000Z",
+  "brief": {
+    "name": "Cyrvony",
+    "category": "Цифровые сервисы и корпоративные решения (Беларусь)",
+    "website": "https://cyrvony.by",
+    "short_description": "Cyrvony — компания, меняющая рутину повседневности. Мы не делаем что-то новое, лишь упрощаем привычное.",
+    "audiences": [
+      "Организации и команды, которым нужна цифровизация «без лишней сложности»",
+      "Бизнес, рассматривающий корпоративную базу знаний и ответы на основе документов (продукт «Информаторий»)"
+    ]
+  },
+  "positioning": {
+    "use_cases": [
+      "Telegram-бот RedRunner: уведомление об освободившемся месте для записи",
+      "Система «Информаторий»: ответы из базы знаний компании с опорой на документы, роли доступа и ссылки на источники",
+      "Инициирование проекта или консультация через e-mail hello@cyrvony.club"
+    ],
+    "fit_for": [
+      "Компании, которым на сайте заявлены решения повседневных задач через привычные технологии и «простую» цифровизацию",
+      "Заказчики, которым нужен диалог по внедрению корпоративной базы знаний / RAG-сценария (обсуждение через контакты на сайте)"
+    ],
+    "not_fit_for": [
+      "Сценарии, не покрытые публичным описанием на сайте (SLA, регуляторика, on-prem) — на сайте прямых обязательств нет",
+      "Ожидание полного каталога продуктов: в публичном списке «Что уже готово» указан один проект (RedRunner)"
+    ]
+  },
+  "claims": [
+    {
+      "id": "claim-brand-cyrvony",
+      "statement": "Публичный бренд компании — Cyrvony (в том числе в метаданных и тексте сайта встречается написание čyrvony).",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-site-config", "evid-layout-metadata"]
+    },
+    {
+      "id": "claim-legal-krasny-klub",
+      "statement": "Юридическое наименование организации в публичных материалах: ООО «Красный Клуб».",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-site-config", "evid-footer"]
+    },
+    {
+      "id": "claim-legal-address-minsk",
+      "statement": "В публичной контактной информации указан адрес: Республика Беларусь, г. Минск",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-site-config", "evid-footer"]
+    },
+    {
+      "id": "claim-product-redrunner",
+      "statement": "В разделе проектов описан RedRunner как Telegram-бот, который может прислать уведомление об освободившемся месте для записи.",
+      "kind": "capability",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-service-redrunner"]
+    },
+    {
+      "id": "claim-informatoriy-rag-positioning",
+      "statement": "Страница «Информаторий» в метаданных позиционирует продукт как «AI RAG для бизнеса» с ответами из базы знаний компании, проверкой источников и контролем доступа.",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-informatoriy-metadata"]
+    },
+    {
+      "id": "claim-informatoriy-ui-value-prop",
+      "statement": "В интерфейсе страницы «Информаторий» указано: поднять контент из PDF, Notion и внутренних инструкций в ответы без «галлюцинаций», с опорой на документы, ролями доступа и ссылками на источники.",
+      "kind": "capability",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-informatoriy-hero-copy"]
+    },
+    {
+      "id": "claim-informatoriy-og-features",
+      "statement": "В Open Graph-описании страницы «Информаторий» перечислены: корпоративная база знаний, понятные ответы, поиск по документам, диалог для сотрудников и клиентов, аналитика вопросов.",
+      "kind": "capability",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-informatoriy-opengraph"]
+    },
+    {
+      "id": "claim-contact-hello-email",
+      "statement": "Для связи на сайте указан адрес электронной почты hello@cyrvony.club (кнопки на главной и на странице «Информаторий»).",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-cta-home", "evid-cta-informatoriy"]
+    },
+    {
+      "id": "claim-about-self-description",
+      "statement": "В блоке «О čyrvony» компания описывает себя как проводника «от рутины к автономности» и формулирует философию: делать трудное простым, упрощая уже существующее без изобретения с нуля.",
+      "kind": "positioning",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-about-section"]
+    },
+    {
+      "id": "claim-about-stats-displayed",
+      "statement": "На главной странице в блоке «О нас» отображаются счётчики: «0+» лет на рынке, «1» проектов запущено, «3» задач в работе.",
+      "kind": "metric",
+      "truth_status": "evidenced",
+      "evidence_ids": ["evid-about-stats"]
+    },
+    {
+      "id": "claim-hypothesis-full-product-scope",
+      "statement": "Полный функциональный охват RedRunner и «Информатория» (интеграции, лимиты, цены, сроки внедрения) на публичном лендинге не раскрыт.",
+      "kind": "limit",
+      "truth_status": "hypothesis"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evid-layout-metadata",
+      "kind": "quote",
+      "citation": "Title: «Cyrvony — Красный Клуб»; description: «Cyrvony — компания, меняющая рутину повседневности. Мы не делаем что-то новое, лишь упрощаем привычное.»",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/app/layout.tsx",
+          "label": "metadata корневого layout"
+        }
+      ]
+    },
+    {
+      "id": "evid-site-config",
+      "kind": "quote",
+      "citation": "siteConfig: name «Cyrvony», legalName «ООО \"Красный Клуб\"», shortDescription и почтовый адрес в Минске (Schema.org Organization).",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/lib/site.ts",
+          "label": "Конфиг бренда и юридического лица"
+        }
+      ]
+    },
+    {
+      "id": "evid-footer",
+      "kind": "quote",
+      "citation": "Подвал: «© ООО \"Красный Клуб\"» и УНП: «193880592».",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/Footer.tsx",
+          "label": "Подвал главной страницы"
+        }
+      ]
+    },
+    {
+      "id": "evid-service-redrunner",
+      "kind": "quote",
+      "citation": "RedRunner — «Телеграм-бот, способный прислать вам уведомление об освободившемся месте для записи. Пока он следит, вам остаётся лишь подождать.»",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/data/services.ts",
+          "label": "Описание сервиса в списке проектов"
+        }
+      ]
+    },
+    {
+      "id": "evid-informatoriy-metadata",
+      "kind": "quote",
+      "citation": "Meta description: «Информаторий — AI RAG для бизнеса: ответы из базы знаний вашей компании с проверкой источников и контролем доступа.»",
+      "url": "https://cyrvony.by/informatoriy",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/app/informatoriy/page.tsx",
+          "label": "Metadata страницы /informatoriy"
+        }
+      ]
+    },
+    {
+      "id": "evid-informatoriy-opengraph",
+      "kind": "quote",
+      "citation": "Open Graph description: «Корпоративная база знаний + понятные ответы: поиск по документам, диалог для сотрудников и клиентов, аналитика вопросов.»",
+      "url": "https://cyrvony.by/informatoriy",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/app/informatoriy/page.tsx",
+          "label": "openGraph страницы /informatoriy"
+        }
+      ]
+    },
+    {
+      "id": "evid-informatoriy-hero-copy",
+      "kind": "quote",
+      "citation": "Текст на странице: «Поднимите свой контент из PDF, Notion и внутренних инструкций в ответы без „галлюцинаций“: только опора на ваши документы, роли доступа и ссылки на источники.»",
+      "url": "https://cyrvony.by/informatoriy",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/informatoriy/InformatoriyPageClient.tsx",
+          "label": "Hero/подсказка на странице Информаторий"
+        }
+      ]
+    },
+    {
+      "id": "evid-cta-home",
+      "kind": "quote",
+      "citation": "Блок контактов: ссылка mailto:hello@cyrvony.club («Начать проект»).",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/sections/CtaSection.tsx",
+          "label": "CTA главной страницы"
+        }
+      ]
+    },
+    {
+      "id": "evid-cta-informatoriy",
+      "kind": "quote",
+      "citation": "На странице Информаторий: кнопки «Обсудить внедрение» и блок внизу со ссылкой mailto:hello@cyrvony.club.",
+      "url": "https://cyrvony.by/informatoriy",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/informatoriy/InformatoriyPageClient.tsx",
+          "label": "Кнопка обсуждения внедрения"
+        },
+        {
+          "ref": "cyrvony-landing/src/components/informatoriy/InformatoriyCtaSection.tsx",
+          "label": "Нижний CTA Информатория"
+        }
+      ]
+    },
+    {
+      "id": "evid-about-section",
+      "kind": "quote",
+      "citation": "«Мы — проводник, ведущий от рутины к автономности»; «Наша философия: делать трудное простым. Мы не создаём что-то принципиально новое — мы берём уже существующее и упрощаем его…»",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/sections/AboutSection.tsx",
+          "label": "Секция О čyrvony"
+        }
+      ]
+    },
+    {
+      "id": "evid-about-stats",
+      "kind": "quote",
+      "citation": "Отображаемые показатели: «0+» / «Лет на рынке», «1» / «Проектов запущено», «3» / «Задач в работе».",
+      "url": "https://cyrvony.by/",
+      "source_refs": [
+        {
+          "ref": "cyrvony-landing/src/components/sections/AboutSection.tsx",
+          "label": "Массив stats в секции О нас"
+        }
+      ]
+    }
+  ],
+  "competitor_context": [],
+  "target_llm_queries": [
+    {
+      "query": "Что такое Cyrvony и чем она занимается?",
+      "coverage_doc_slugs": ["product-overview", "use-cases"]
+    },
+    {
+      "query": "Как связаться с Cyrvony / Красный Клуб?",
+      "coverage_doc_slugs": ["product-overview", "faq"]
+    },
+    {
+      "query": "Что такое система Информаторий и для чего она нужна бизнесу?",
+      "coverage_doc_slugs": ["use-cases", "evidence"]
+    },
+    {
+      "query": "Что на сайте сказано про RedRunner и Telegram?",
+      "coverage_doc_slugs": ["use-cases", "evidence"]
+    },
+    {
+      "query": "Какие ограничения у публичного описания продукта на лендинге?",
+      "coverage_doc_slugs": ["faq", "comparison-context"]
+    },
+    {
+      "query": "Есть ли на сайте сравнение с конкурентами или цены?",
+      "coverage_doc_slugs": ["comparison-context", "faq"]
+    },
+    {
+      "query": "Где юридический адрес и название компании Cyrvony?",
+      "coverage_doc_slugs": ["evidence", "faq"]
+    },
+    {
+      "query": "Какие формулировки про AI и базу знаний использует сайт для Информатория?",
+      "coverage_doc_slugs": ["evidence", "product-overview"]
+    }
+  ],
+  "source_of_truth": {
+    "primary_owner": "ООО «Красный Клуб» — владелец публичного контента сайта (по данным сайта; детали договорных отношений не разглашаются на лендинге)",
+    "documents": [
+      {
+        "label": "Главная страница (лендинг)",
+        "uri": "https://cyrvony.by/"
+      },
+      {
+        "label": "Страница «Информаторий»",
+        "uri": "https://cyrvony.by/informatoriy"
+      }
+    ]
+  },
+  "policy_constraints": [
+    "Не утверждать факты, отсутствующие в product-truth-model.json и не подкреплённые evidence или явным hypothesis.",
+    "Не использовать в публикуемом пакете имя внутреннего инструмента сборки; публичные пути — только нейтральные (см. validation-report).",
+    "Не придумывать сравнения с конкурентами, цены, SLA, сертификаты и интеграции, если они не следуют из публичного сайта.",
+    "Различать truth_status: evidenced и hypothesis; при недостатке фактов указывать пробелы и отсылать к hello@cyrvony.club."
+  ]
+}

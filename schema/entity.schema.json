@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lumen.local/schema/entity.schema.json",
-  "title": "LumenEntity",
+  "$id": "urn:product-knowledge-package:schema:entity",
+  "title": "Entity",
   "type": "object",
   "required": [
     "id",
@@ -15,11 +15,23 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "Стабильный идентификатор сущности Lumen"
+      "description": "Стабильный идентификатор сущности в product knowledge package"
     },
     "type": {
       "type": "string",
-      "description": "Тип: Project, ContentBrief, Source, ContentTemplate, Prompt, GenerationPipeline, GeneratedArtifact, StyleGuide, Audience, Channel, Review, Revision, AgentRole или доменный тип (Concept, Guide, …)"
+      "description": "Тип сущности вокруг product visibility",
+      "enum": [
+        "Product",
+        "Feature",
+        "UseCase",
+        "Audience",
+        "Category",
+        "Competitor",
+        "Claim",
+        "Evidence",
+        "FAQ",
+        "Comparison"
+      ]
     },
     "title": {
       "type": "string",
@@ -54,15 +66,63 @@
       "type": "string",
       "format": "uri"
     },
+    "source_refs": {
+      "type": "array",
+      "description": "Трассировка на immutable raw / канонический первоисточник (слой данных до compiled truth)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "Стабильный ключ сыроцы (путь репозитория, ключ CMS, immutable ID)"
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "Если сырец уже как URL-снимок"
+          },
+          "label": {
+            "type": "string"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "truth_status": {
+      "type": "string",
+      "description": "Для типа Claim: согласуется со статусами в product-truth-model; hypothesis/policy_forbidden освобождают от связи claim_supported_by",
+      "enum": ["evidenced", "hypothesis", "policy_forbidden"]
+    },
     "relations": {
       "type": "array",
+      "description": "Связи исходят из текущей сущности (subject): каждая запись читается как subject —[type]→ object, где object задаётся полем target_id.",
       "items": {
         "type": "object",
         "required": ["type", "target_id"],
         "properties": {
           "type": {
             "type": "string",
-            "description": "Например: related_to, part_of, depends_on, used_for, mentions, updated_by"
+            "description": "Типизированная связь графа product visibility; направление: от этой сущности к target_id",
+            "enum": [
+              "claim_supported_by",
+              "product_has_feature",
+              "feature_serves_use_case",
+              "product_has_claim",
+              "product_has_use_case",
+              "compares_to",
+              "audience_for",
+              "evidences_product",
+              "evidenced_by",
+              "faq_answers_about",
+              "comparison_context_includes_competitor"
+            ]
           },
           "target_id": { "type": "string" }
         },
@@ -78,16 +138,58 @@
       "items": { "type": "string" }
     },
     "language": { "type": "string" },
-    "project_id": { "type": "string", "description": "Связь с Project при необходимости" },
-    "embedding_text": { "type": "string", "description": "Опциональный текст для эмбеддинга" },
+    "product_id": {
+      "type": "string",
+      "description": "Связь с Product при мультипродуктовом пакете (MVP: один продукт)"
+    },
+    "embedding_text": {
+      "type": "string",
+      "description": "Опциональный линейный текст для эмбеддинга во внешнем индексе"
+    },
     "deprecation_status": {
       "type": "string",
       "enum": ["active", "deprecated", "sunset"]
     }
   },
   "additionalProperties": true,
-  "anyOf": [
-    { "required": ["title"] },
-    { "required": ["name"] }
+  "allOf": [
+    {
+      "anyOf": [{ "required": ["title"] }, { "required": ["name"] }]
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "Claim" } },
+        "required": ["type"]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": { "truth_status": { "const": "hypothesis" } },
+            "required": ["truth_status"]
+          },
+          {
+            "properties": { "truth_status": { "const": "policy_forbidden" } },
+            "required": ["truth_status"]
+          },
+          {
+            "properties": {
+              "relations": {
+                "type": "array",
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "const": "claim_supported_by" },
+                    "target_id": { "type": "string", "minLength": 1 }
+                  },
+                  "required": ["type", "target_id"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": ["relations"]
+          }
+        ]
+      }
+    }
   ]
 }

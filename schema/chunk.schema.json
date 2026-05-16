@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lumen.local/schema/chunk.schema.json",
-  "title": "LumenChunk",
+  "$id": "urn:product-knowledge-package:schema:chunk",
+  "title": "Chunk",
+  "description": "LLM-readable текстовый фрагмент из канонических документов или производных текстов для ingest и retrieval во внешнем RAG без потери ключевых фактов.",
   "type": "object",
   "required": [
     "chunk_id",
@@ -14,22 +15,23 @@
   "properties": {
     "chunk_id": {
       "type": "string",
-      "description": "Стабильный ID чанка"
+      "description": "Стабильный ID чанка в пределах пакета знаний"
     },
     "doc_id": {
       "type": "string",
-      "description": "ID исходного документа или артефакта"
+      "description": "Идентификатор источника: slug канонического Markdown или ключ артефакта"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "description": "Краткий заголовок фрагмента для сниппетов retrieval"
     },
     "summary": {
       "type": "string",
-      "description": "Краткая выжимка чанка"
+      "description": "Очень короткая выжимка (опционально) для фильтров и превью"
     },
     "text": {
       "type": "string",
-      "description": "Текстовое содержимое для retrieval"
+      "description": "Самодостаточный текстовый блок для машинного чтения и векторного поиска"
     },
     "tags": {
       "type": "array",
@@ -46,11 +48,37 @@
     "canonical_url": {
       "type": "string",
       "format": "uri",
-      "description": "Канонический URL фрагмента или страницы-источника"
+      "description": "Канонический URL фрагмента или страницы-источника в пакете"
+    },
+    "source_refs": {
+      "type": "array",
+      "description": "Связка с исходниками секции канонического документа или сырыми материалами",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": { "type": "string" },
+          "uri": { "type": "string", "format": "uri" },
+          "label": { "type": "string" },
+          "retrieved_at": { "type": "string", "format": "date-time" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
     },
     "entity_ids": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "description": "Сущности Product / Claim / Evidence / FAQ и др., упомянутые во фрагменте"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Явное подмножество entity_ids для типа Claim при разборе пакета"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Явное подмножество или дубль entity_ids типа Evidence, задействованных в фрагменте"
     },
     "language": { "type": "string" }
   },

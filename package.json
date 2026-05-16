@@ -1,0 +1,32 @@
+{
+  "name": "lumen",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "license": "LicenseRef-MIT-Commons-Clause-1.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "vitest run",
+    "generate:package": "tsx src/cli/generate-package.ts",
+    "validate:schema": "tsx src/cli/validate-schema.ts",
+    "validate:exports": "tsx src/cli/validate-exports.ts",
+    "validate:package": "tsx src/cli/validate-package.ts",
+    "validate": "npm run validate:schema && npm run validate:exports && npm run validate:package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "@types/node": "^22.15.29",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "eslint": "^9.27.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1",
+    "vitest": "^3.2.4",
+    "yaml": "^2.8.0"
+  }
+}

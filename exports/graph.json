@@ -1,0 +1,54 @@
+{
+  "schema_version": "graph.example.v1",
+  "package_id": "ent.product.demo-notebook",
+  "package_version": "0.3.0",
+  "generated_at": "2026-05-16T12:00:00Z",
+  "nodes": [
+    {
+      "id": "ent.product.demo-notebook",
+      "kind": "entity",
+      "type": "Product",
+      "label": "Demo Notebook"
+    },
+    {
+      "id": "ent.feature.sync",
+      "kind": "entity",
+      "type": "Feature",
+      "label": "Облачная синхронизация"
+    },
+    {
+      "id": "ent.claim.sla-sync",
+      "kind": "entity",
+      "type": "Claim",
+      "label": "P95 синхронизации"
+    },
+    {
+      "id": "ent.evidence.metrics-q1",
+      "kind": "entity",
+      "type": "Evidence",
+      "label": "Отчёт Q1"
+    }
+  ],
+  "edges": [
+    {
+      "type": "product_has_feature",
+      "from": "ent.product.demo-notebook",
+      "to": "ent.feature.sync"
+    },
+    {
+      "type": "product_has_claim",
+      "from": "ent.product.demo-notebook",
+      "to": "ent.claim.sla-sync"
+    },
+    {
+      "type": "claim_supported_by",
+      "from": "ent.claim.sla-sync",
+      "to": "ent.evidence.metrics-q1"
+    },
+    {
+      "type": "evidences_product",
+      "from": "ent.evidence.metrics-q1",
+      "to": "ent.product.demo-notebook"
+    }
+  ]
+}

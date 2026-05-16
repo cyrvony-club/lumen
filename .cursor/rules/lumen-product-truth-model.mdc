@@ -1,0 +1,82 @@
+---
+description: Контракт оценки проекта и создания product-truth-model.json для нового продукта (JSON Schema, claims/evidence, валидация)
+globs: "**/product-truth-model*.json,schema/product-truth-model.schema.json,.cursor/skills/product-truth-model/**"
+alwaysApply: false
+---
+
+# Lumen — контракт `product-truth-model.json`
+
+Применять при **оценке нового проекта/продукта** и попытке **составить или заполнить** `product-truth-model.json` перед генерацией package.
+
+Дополнительно: skill `.cursor/skills/product-truth-model/` (пошаговый опрос пользователя).
+
+## Границы
+
+- Lumen **project-agnostic**: не хранит знания о конкретных сторонних проектах в кодовой базе инструмента.
+- `product-truth-model.json` — **внешний вход** (путь через `--input`), не обязан лежать в корне репозитория Lumen.
+- Публичный package **не содержит** имя Lumen, `/lumen/*`, абсолютные локальные пути (`/Users/`, `Developer/Projects`, …).
+
+## Процесс (обязательный порядок)
+
+1. **Readonly-оценка источников** — сайт, docs, metadata, pricing, FAQ, changelog, публичные страницы, schema.org; без правок внешнего репозитория без явной задачи.
+2. **Извлечение фактов** — только подтверждённое; пробелы → `hypothesis`, запреты → `policy_constraints` / `policy_forbidden`.
+3. **Структурирование** — заполнение JSON по `schema/product-truth-model.schema.json`.
+4. **Согласование с пользователем** — краткая сводка claims/evidence/пробелов перед финальным сохранением.
+5. **Валидация** — после каждой существенной правки:
+
+```bash
+npm run validate:schema -- # если файл доступен валидатору
+npm run generate:package -- --input <path/to/product-truth-model.json>
+npm run validate
+```
+
+## Обязательные поля (контракт схемы)
+
+| Поле | Требование |
+|------|------------|
+| `schema_version` | Строка версии, напр. `product-truth-model.v1` |
+| `product_id` | Стабильный id, напр. `ent.product.<slug>` |
+| `updated_at` | ISO-8601 UTC |
+| `brief` | `name`, `category`, `website`, `short_description`; опционально `audiences[]` |
+| `claims[]` | Уникальные `id`; каждый claim с `statement`, `truth_status` |
+| `evidence[]` | ≥1 элемент; каждый с `id`, `kind`, `citation` |
+| `target_llm_queries` | **5–8** непустых `query`; опционально `coverage_doc_slugs` |
+| `source_of_truth` | Владелец/документы для разрешения конфликтов |
+| `policy_constraints[]` | Строки-ограничения формулировок |
+
+Опционально: `positioning` (`use_cases`, `fit_for`, `not_fit_for`), `competitor_context[]`.
+
+## `truth_status` (claims)
+
+| Статус | Когда | Требования |
+|--------|-------|------------|
+| `evidenced` | Факт подтверждён источником | Непустой `evidence_ids[]` → существующие `evidence[].id` |
+| `hypothesis` | Не раскрыто или не подтверждено | Без выдачи за установленный факт |
+| `policy_forbidden` | Нельзя утверждать публично | Не смешивать с `evidenced` |
+
+**Запрещено:** выдумывать метрики, сертификаты, отзывы, сравнения с конкурентами без evidence; копировать marketing без привязки к источнику.
+
+## Evidence и `source_refs`
+
+- `citation` — дословная или близкая цитата из источника.
+- `url` — публичный URL, если есть.
+- `source_refs[]` — **нейтральные** указатели (`ref`: относительный путь в репозитории источника или метка документа), **не** абсолютные FS-пути машины разработчика.
+
+## Target LLM queries
+
+5–8 запросов, под которые продукт должен быть **релевантен** в ответах LLM (категория, use case, сравнение, ограничения, доказательства). При наличии `coverage_doc_slugs` — только slug из набора: `product-overview`, `use-cases`, `comparison-context`, `faq`, `evidence`.
+
+## Критерии готовности файла
+
+- JSON проходит `validate:schema`.
+- Каждый `evidenced` claim имеет evidence.
+- Нет противоречий между `brief`, `claims` и `evidence`.
+- В тексте модели нет подстроки `Lumen` (попадает в публичный package).
+- `npm run generate:package` и `npm run validate` завершаются успешно.
+
+## Связанные артефакты
+
+- Гайд для пользователя: `docs/guides/product-truth-model-authoring.md`
+- Схема: `schema/product-truth-model.schema.json`
+- Спецификация продукта: `docs/spec/lumen-product-spec.md`
+- Интеграция package сторонним проектом: `docs/integration/third-party-product-data.md`

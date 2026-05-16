@@ -1,7 +1,26 @@
 {
-  "feed": "lumen-updates",
-  "version": 1,
-  "generated_at": "2026-05-16T00:00:00Z",
-  "base_url": "https://lumen.example",
-  "changes": []
+  "package_id": "ent.product.demo-notebook",
+  "package_version": "0.3.0",
+  "generated_at": "2026-05-16T12:00:00Z",
+  "counts": {
+    "changed_total": 2,
+    "changed_entities": 1,
+    "changed_chunks": 1
+  },
+  "changed_entity_ids": ["ent.product.demo-notebook"],
+  "changed_chunk_ids": ["chunk.evidence-sync-sla"],
+  "changes": [
+    {
+      "id": "ent.product.demo-notebook",
+      "type": "Product",
+      "updated_at": "2026-05-16T12:00:00Z",
+      "canonical_url": "https://example.com/product-data/entities/ent.product.demo-notebook"
+    },
+    {
+      "id": "chunk.evidence-sync-sla",
+      "type": "ChunkExport",
+      "updated_at": "2026-05-16T12:00:00Z",
+      "canonical_url": "https://example.com/product-data/chunks/chunk.evidence-sync-sla"
+    }
+  ]
 }
