@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumen.local/schema/chunk.schema.json",
+  "title": "LumenChunk",
+  "type": "object",
+  "required": [
+    "chunk_id",
+    "doc_id",
+    "title",
+    "text",
+    "tags",
+    "updated_at"
+  ],
+  "properties": {
+    "chunk_id": {
+      "type": "string",
+      "description": "Стабильный ID чанка"
+    },
+    "doc_id": {
+      "type": "string",
+      "description": "ID исходного документа или артефакта"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Краткая выжимка чанка"
+    },
+    "text": {
+      "type": "string",
+      "description": "Текстовое содержимое для retrieval"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "string",
+      "description": "Версия чанка при пересборке корпуса"
+    },
+    "canonical_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Канонический URL фрагмента или страницы-источника"
+    },
+    "entity_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "language": { "type": "string" }
+  },
+  "additionalProperties": false
+}

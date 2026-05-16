@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumen.local/schema/entity.schema.json",
+  "title": "LumenEntity",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "summary",
+    "tags",
+    "updated_at",
+    "version",
+    "canonical_url"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Стабильный идентификатор сущности Lumen"
+    },
+    "type": {
+      "type": "string",
+      "description": "Тип: Project, ContentBrief, Source, ContentTemplate, Prompt, GenerationPipeline, GeneratedArtifact, StyleGuide, Audience, Channel, Review, Revision, AgentRole или доменный тип (Concept, Guide, …)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Заголовок (взаимоисключающе с name для части типов)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Имя (если не используется title)"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "description": "Развёрнутое описание при необходимости"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Время последнего обновления UTC"
+    },
+    "version": {
+      "type": "string",
+      "description": "Версия объекта (semver или согласованная строка)"
+    },
+    "canonical_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target_id"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Например: related_to, part_of, depends_on, used_for, mentions, updated_by"
+          },
+          "target_id": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "related_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "entity_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "language": { "type": "string" },
+    "project_id": { "type": "string", "description": "Связь с Project при необходимости" },
+    "embedding_text": { "type": "string", "description": "Опциональный текст для эмбеддинга" },
+    "deprecation_status": {
+      "type": "string",
+      "enum": ["active", "deprecated", "sunset"]
+    }
+  },
+  "additionalProperties": true,
+  "anyOf": [
+    { "required": ["title"] },
+    { "required": ["name"] }
+  ]
+}
